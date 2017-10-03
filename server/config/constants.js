@@ -7,13 +7,13 @@ const actions = {
 }
 
 const models = {
-  board: {
-    name: 'Board',
-    endpoint: 'boards'
+  vault: {
+    name: 'Vault',
+    endpoint: 'vaults'
   },
-  list: {
-    name: 'List',
-    endpoint: 'lists'
+  keep: {
+    name: 'Keep',
+    endpoint: 'keeps'
   },
   user: {
     name: 'User',
