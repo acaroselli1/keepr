@@ -88,6 +88,7 @@ var store = new vuex.Store({
   state: {
     user: {},
     vaults: {},
+    keeps:{},
     activeVault: {},
     error: {}
 
@@ -123,6 +124,13 @@ var store = new vuex.Store({
       //console.log(data)
       state.activeVault = data
     },
+    
+    // keeps mutations
+
+    setKeeps(state, data) {
+      state.keeps = data
+    },
+
     handleError(state, err) {
       state.error = err
     }
@@ -156,8 +164,45 @@ var store = new vuex.Store({
 
   actions: {
      //Keep Actions
+     getKeepsByVault({ commit, dispatch }, vaultId) {
+      api('vaults/'+ vaultId + '/keeps')
+        .then(res => {
+          commit('setKeeps', res.data.data)
+          console.log(res.data.data);
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    getKeeps({ commit, dispatch }, id) {
+      api('keeps')
+        .then(res => {
+          commit('setKeeps', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    createKeep({ commit, dispatch }, keep) {
+      api.post('keeps', keep)
+        .then(res => {
+          dispatch('getKeeps')
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
 
-     
+    },
+    removeKeep({ commit, dispatch }, keep) {
+      api.delete('/keeps/' + keep._id)
+        .then(res => {
+          dispatch('getKeeps')
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
 
 
     //Vault Actions
