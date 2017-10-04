@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Mainsearch from '@/components/mainsearch'
 import Userdash from '@/components/userdash'
+import Myvaults from '@/components/myvaults'
+import Mykeeps from '@/components/mykeeps'
 
 Vue.use(Router)
 
@@ -22,12 +24,17 @@ export default new Router({
       path: '/userdash',
       name: 'Userdash',
       component: Userdash,
+    },
+    {
+      path: '/myvaults',
+      name: 'Myvaults',
+      component: Myvaults,
+    },
+    {
+      path: '/mykeeps',
+      name: 'Mykeeps',
+      component: Mykeeps,
     }
-    // {
-    //   path: '/vaults',
-    //   name: 'Vaults',
-    //   component: Vaults,
-    // },
     
 
 

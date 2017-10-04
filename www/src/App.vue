@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style>
-#app {
+body {
   font-family: 'Poppins','Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -28,6 +28,7 @@ export default {
   color:white;
   background-color:black;
   height:100vh;
+  background-size:cover;
   margin:-8px -8px -8px -8px;
 
 }

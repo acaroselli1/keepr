@@ -6,8 +6,8 @@
       <div class="heading">
         <button class="btn btn-primary" @click="logoutUser">Logout</button>
         <li><router-link class ="browse" to="/mainsearch">Browse</router-link></li>
-        <li><router-link class ="vaults" to="/mainsearch">MyVaults</router-link></li>
-        <li><router-link class ="keeps" to="/mainsearch">MyKeeps</router-link></li>
+        <li><router-link class ="vaults" to="/myvaults">MyVaults</router-link></li>
+        <li><router-link class ="keeps" to="/mykeeps">MyKeeps</router-link></li>
 
       </div>
     </div>  

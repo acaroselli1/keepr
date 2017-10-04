@@ -1,44 +1,61 @@
 <template class="all">
-<div>
-        <h1>MyVaults</h1>
-    
+    <div> 
+    <h1>My<span>k</span>eeps</h1>
         <button class="btn btn-primary" @click="logoutUser">Logout</button>
         <li><router-link class ="browse" to="/userdash">Dashboard</router-link></li> 
-     
+      <form @submit.prevent="createKeep()">
+          <p>
+          <input class="formcss" type="text" v-model="keepname" placeholder="Keep Name">
+          
+          <input class="formcss" type="text" v-model="keepdescription" placeholder="Keep Description">
+          
+          <input class="formcss" type="text" v-model="keepUrl" placeholder="Keep Img Url">
 
-      <form @submit.prevent="createVault()">
-        <input class="formcss" type="text" v-model="name" placeholder="Vault Name">
-        <p>
-          <input class="formcss" type="text" v-model="description" placeholder="Vault Description">
-        </p>
-        <button class="btn btn-primary vault">Create Vault</button>
+          <input class="formcss" type="text" v-model="vaultName" placeholder= "Vault Name">
+
+
+          <button class = "btn btn-primary">Make Public</button>
+          </p>
+        <button class="btn btn-primary vault">Create Keep</button>
       </form>
 
-
       <div v-if="see">
-        <div class="boards" v-for="vault in vaults">
-          <span @click="getVault(vault._id)">
-        <router-link class="vaultcolor" :to="'/vaults/'+vault._id">{{vault.name}}</router-link> <!--{{board.description}}-->
+        <div class="boards" v-for="keep in keeps">
+          <span @click="getKeeps(keep._id)">
+        <router-link class="vaultcolor" :to="'/keeps/'+ keep._id">{{keep.name}}</router-link> <!--{{board.description}}-->
         </span>
-          <span @click="removeVault(vault)"><button class="red btn btn-primary">x</button></span>
+          <span @click="removeKeep(keep)"><button class="red btn btn-primary">x</button></span>
         </div>
       </div>
-    
-  </div>
+      <div class="container" >
+        <div class="row" >
+          <div class="col-xs-2" v-for ="keep in keeps"> 
+            <div class="card" style="width: 20rem;" >
+              <img class="card-img-top" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt="Card image cap">
+              <div class="card-body">
+                <h4 class="card-title">{{keep.name}}</h4>
+                <p class="card-text">{{keep.description}}</p>
+                <a :href="keepUrl" class="btn btn-primary">Keep</a><span @click="removeKeep(keep)"><button class="red btn btn-primary">x</button></span> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ </div>
 </template>
 
 <script>
   import { store } from '../store'
   export default {
-    name: 'myvaults',
+    name: 'mykeeps',
     data() {
       return {
         keepname:'',
         keepdescription:'',
         keepUrl:'',
         vaultName:'',
-        name: '',
-        description: '',
+        // name: '',
+        // description: '',
         see: true,
         seen: false,
         unameSeen: false
@@ -182,14 +199,10 @@
     color: black;
   }
 
-  img {
-    padding-top: 7vh;
-  }
-
-  div {
+  /* div {
     margin: -8px -16px -8px -8px;
     color: white;
-  }
+  } */
 
   .vault{
     margin-bottom:5vh;
@@ -201,4 +214,15 @@
   .vaultcolor:hover{
    color:white;
   }
+  .card{
+    border: 5px solid grey;
+    border-radius:15px;
+  }
+
+  img{
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+  }
+
+
 </style>
