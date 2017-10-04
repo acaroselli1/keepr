@@ -15,6 +15,7 @@ module.exports = {
       let action = 'Find User Vaults'
       Vaults.find({creatorId: req.session.uid})
         .then(vaults => {
+          console.log("vaults: ",vaults);
           res.send(handleResponse(action, vaults))
         }).catch(error => {
           return next(handleResponse(action, null, error))
@@ -61,4 +62,4 @@ function handleResponse(action, data, error) {
       response.error = error
     }
     return response
-  }
+  }  

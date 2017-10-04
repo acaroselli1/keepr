@@ -88,7 +88,8 @@ var store = new vuex.Store({
   state: {
     user: {},
     vaults: {},
-    activeVault: {}
+    activeVault: {},
+    error: {}
 
   },
 
@@ -121,6 +122,9 @@ var store = new vuex.Store({
     setActiveVault(state, data) {
       //console.log(data)
       state.activeVault = data
+    },
+    handleError(state, err) {
+      state.error = err
     }
 
 
@@ -151,11 +155,17 @@ var store = new vuex.Store({
 
 
   actions: {
+     //Keep Actions
+
+     
+
+
     //Vault Actions
     getVaults({ commit, dispatch }) {
       api('uservaults')
         .then(res => {
           commit('setVaults', res.data.data)
+          console.log(res.data.data);
         })
         .catch(err => {
           commit('handleError', err)
@@ -217,7 +227,7 @@ var store = new vuex.Store({
         if (res.data.data) {
           router.push('/mainsearch')
         }
-        commit('createUser', res)
+        commit('createUser', res.data.data)
       })
     },
 
@@ -229,7 +239,7 @@ var store = new vuex.Store({
           return router.push('/')
         }
         commit('setUser', res.data.data)
-        router.push('/mainsearch')
+        router.push('/userdash')
       })
         .catch(err => {
           //commit('handleError', err)
