@@ -1,13 +1,13 @@
 <template class="all">
 
   <div>
-      <h1><span>k</span>eepr Dashboard</h1>
+      <h1><span id ="title">k</span>eepr Dashboard</h1>
       
       <div class="heading">
         <button class="btn btn-primary" @click="logoutUser">Logout</button>
         <li><router-link class ="browse" to="/mainsearch">Browse</router-link></li>
         <li><router-link class ="vaults" to="/myvaults">MyVaults</router-link></li>
-        <li><router-link class ="keeps" to="/mykeeps">MyKeeps</router-link></li>
+        <li><router-link class="keeps" to="/mykeeps">My<span class="k">k</span>eeps</router-link></li>
 
       </div>
     </div>  
@@ -63,18 +63,22 @@
     margin-left: 1vw;
   }
 
-  li,
+  li, .k,
   .browse {
     color: grey;
     text-decoration: none;
   }
-
+  .keeps:hover .k{
+    color: skyblue;
+    text-shadow: 1px 1px 8px blue;
+    text-decoration:none; 
+  }
   li:hover,
   .browse:hover, .keeps:hover, .vaults:hover {
     color: white;
   }
 
-  span, .vaultcolor {
+  #title {
     color: skyblue;
     text-shadow: 1px 1px 8px blue;
     text-decoration:none;
@@ -103,4 +107,8 @@
   .vaultcolor:hover{
    color:white;
   }
+  /*.keeps:hover .k{
+    color:skyblue;
+    text-shadow:1px 1px 8px blue;
+  }*/
 </style>

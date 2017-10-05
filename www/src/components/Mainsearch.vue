@@ -72,6 +72,7 @@
     color: white;
     padding-top: 10vh;
     margin-top:8px;
+    margin-bottom:7vh;
   }
 
   span:hover{

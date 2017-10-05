@@ -36,7 +36,7 @@
               <div class="card-body">
                 <h4 class="card-title">{{keep.name}}</h4>
                 <p class="card-text">{{keep.description}}</p>
-                <a :href="keep.imgUrl" class="btn btn-primary">Link</a><span @click="removeKeep(keep)"><button class="red btn btn-primary">x</button></span> 
+                <a :href="keep.imgUrl" class="btn btn-primary link">Link</a><span @click="removeKeep(keep)"><button class="btn btn-primary remove">x</button></span> 
               </div>
             </div>
           </div>
@@ -224,6 +224,7 @@
   .card{
     border: 5px solid grey;
     border-radius:15px;
+    position:relative;
   }
 
   img{
@@ -231,6 +232,19 @@
     border-top-left-radius:10px;
     color:skyblue;
   }
+  .remove{
+   opacity:0;
+  }
 
+  .card:hover .remove{
+  opacity:1;
+  }
 
+  .link{
+  opacity:0;
+  }
+
+  .card:hover .link{
+  opacity:1;
+  }
 </style>
