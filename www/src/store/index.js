@@ -131,6 +131,10 @@ var store = new vuex.Store({
       state.keeps = data
     },
 
+    setKeepsByVault(state,data){
+      state.keeps = data
+    },
+
     handleError(state, err) {
       state.error = err
     }
@@ -164,11 +168,25 @@ var store = new vuex.Store({
 
   actions: {
      //Keep Actions
+     setKeepToVault({ commit, dispatch }, keep) {
+      // let updatedTask = updater.task
+      // updatedTask.listId = updater.updatedId
+      api.put('/keeps/' + keep._id, keep)
+      .then(res => {
+        dispatch('getKeepsByVault', keep)
+
+        // updater.task.listId = updater.oldId
+        // dispatch('getTasksByList', updater.task)
+      })
+      .catch(err => {
+        commit('handleError', err)
+      })
+    },
      getKeepsByVault({ commit, dispatch }, vaultId) {
       api('vaults/'+ vaultId + '/keeps')
         .then(res => {
           commit('setKeeps', res.data.data)
-          console.log(res.data.data);
+          console.log("In the store, in function getKeepsByVault", res.data.data);
         })
         .catch(err => {
           commit('handleError', err)

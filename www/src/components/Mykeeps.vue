@@ -1,7 +1,7 @@
 <template class="all">
     <div> 
       <userdash></userdash>
-      <h1>My<span>k</span>eeps</h1>
+      <h1>My<span class="k">k</span>eeps</h1>
         <!-- <button class="btn btn-primary" @click="logoutUser">Logout</button>
         <li><router-link class ="browse" to="/userdash">Dashboard</router-link></li>  -->
       <form @submit.prevent="createKeep()">
@@ -12,14 +12,25 @@
           
           <input class="formcss" type="text" v-model="keepUrl" placeholder="Keep Img or Video Url">
 
-          <input class="formcss" type="text" v-model="vaultName" placeholder= "Vault Name">
-
+          <!-- <input class="formcss" type="text" v-model="vaultName" placeholder= "Vault Name"> -->
+          <span class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Optional Vault Storage ...
+                      <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                  <div v-for="vault in vaults">
+                      <span id ="vaultNames" @click="setKeepToVault(vault._id)">{{vault.name }}</span>
+                  </div>
+              </ul>
+          </span>
 
           <button class = "btn btn-primary">Make Public</button>
           </p>
         <button class="btn btn-primary vault">Create Keep</button>
       </form>
 
+     
+     
+   
    <!--<div v-if="see">
         <div class="boards" v-for="keep in keeps">
           <span @click="getKeeps(keep._id)">
@@ -32,7 +43,7 @@
         <div class="row" >
           <div class="col-xs-2" v-for ="keep in keeps"> 
             <div class="card" style="width: 20rem;" >
-              <img class="card-img-top" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt='click "Link" for video'>
+              <img class="card-img-top alt" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt='click "Link" for video'>
               <div class="card-body">
                 <h4 class="card-title">{{keep.name}}</h4>
                 <p class="card-text">{{keep.description}}</p>
@@ -70,13 +81,13 @@
 
     },
     computed: {
+     
+      keeps() {
+        return this.$store.state.keeps 
+      },
       vaults() {
         return this.$store.state.vaults
       },
-      keeps() {
-        return this.$store.state.keeps 
-      }
-    
     },
     components: {
            userdash
@@ -153,8 +164,17 @@
       },
       logoutUser() {
         this.$store.dispatch('logout')
+      },
+      setKeepToVault(vaultId) {
+        keep.vaultId = vaultId       
+        
+      this.$store.dispatch('setKeepToVault', keep)
       }
+
+
     },
+
+    
     props: {
       flag: true //possibly use for login/create new user
     }
@@ -196,7 +216,7 @@
     color: white;
   }
 
-  span, .vaultcolor {
+  .k, .vaultcolor {
     color: skyblue;
     text-shadow: 1px 1px 8px blue;
     text-decoration:none;
@@ -224,13 +244,11 @@
   .card{
     border: 5px solid grey;
     border-radius:15px;
-    position:relative;
   }
 
   img{
     border-top-right-radius:10px;
     border-top-left-radius:10px;
-    color:skyblue;
   }
   .remove{
    opacity:0;
@@ -246,5 +264,18 @@
 
   .card:hover .link{
   opacity:1;
+  }
+
+  .alt{
+    color:skyblue;
+  }
+
+  .dropdown{
+   margin-bottom:2vh;   
+  }
+
+  #vaultNames{
+    color:black;
+    font-weight:bold;
   }
 </style>

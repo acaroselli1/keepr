@@ -35,7 +35,7 @@ module.exports = {
   //   }
   // }
   vaultKeeps: {
-    path: '/vault/:vaultId/keeps',
+    path: '/vaults/:vaultId/keeps',
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find Vault Keeps'
