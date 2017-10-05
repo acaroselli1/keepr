@@ -1,8 +1,11 @@
 <template>
   <div class="mainsearch">
-    <router-link to="/"><button class="btn btn-primary pull-left">Login - Register</button></router-link>
-    <router-link to="/"><button @click="logout()" class="btn btn-primary pull-right">Logout</button></router-link>
-    <h1><span>k</span>eepr Main List</h1>
+    <userdash></userdash>
+    <!--<router-link to="/"><button class="btn btn-primary pull-left login">Login - Register</button></router-link>
+    <p>
+    <router-link to="/"><span @click ="loggedIn">Dashboard</span><button @click="logout()" class="btn btn-primary pull-right logout">Logout</button></router-link>
+    </p>-->
+    <h1><span class="k">k</span>eepr Main List</h1>
     <div class="container">
       <div class="row">
         <div class="col-xs-3">
@@ -21,6 +24,8 @@
 </template>
 
 <script>
+  
+  import userdash from './userdash' 
   import { store } from '../store'
   export default {
     name: 'mainsearch',
@@ -37,10 +42,20 @@
     //   })
     // },
 
-    methods: {
+     components:{
+      userdash
+      },
+   
+      methods: {
       logout() {
         this.$store.dispatch('logout')
       },
+
+      loggedIn(){
+        location.reload();
+      }
+     
+
     }
 
 
@@ -59,11 +74,14 @@
     margin-top:8px;
   }
 
-
+  span:hover{
+    color:white;
+  }
 
   span {
-    color: skyblue;
+    color: grey;
     text-shadow: 1px 1px 8px blue;
+
   }
 
   button {
@@ -79,5 +97,21 @@
   img{
     border-top-right-radius:10px;
     border-top-left-radius:10px;
+  }
+
+  p{
+    margin-top:3vh;
+  }
+
+  .login{
+  margin-left:2vw; 
+  }
+
+  .logout{
+  margin-right:2vw;  
+  }
+
+  .k{
+    color:skyblue;
   }
 </style>

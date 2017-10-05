@@ -1,9 +1,10 @@
 <template class="all">
 <div>
+        <userdash></userdash>
         <h1>MyVaults</h1>
     
-        <button class="btn btn-primary" @click="logoutUser">Logout</button>
-        <li><router-link class ="browse" to="/userdash">Dashboard</router-link></li> 
+        <!--<button class="btn btn-primary" @click="logoutUser">Logout</button>
+        <li><router-link class ="browse" to="/userdash">Dashboard</router-link></li>--> 
      
 
       <form @submit.prevent="createVault()">
@@ -18,7 +19,7 @@
       <div v-if="see">
         <div class="boards" v-for="vault in vaults">
           <span @click="getVault(vault._id)">
-        <router-link class="vaultcolor" :to="'/vaults/'+vault._id">{{vault.name}}</router-link> <!--{{board.description}}-->
+        <router-link class="vaultcolor" :to="'/vault/'+vault._id">{{vault.name}}</router-link> <!--{{board.description}}-->
         </span>
           <span @click="removeVault(vault)"><button class="red btn btn-primary">x</button></span>
         </div>
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+  import userdash from './userdash' 
   import { store } from '../store'
   export default {
     name: 'myvaults',
@@ -57,6 +59,9 @@
         return this.$store.state.keeps 
       }
     
+    },
+    components:{
+    userdash
     },
 
     methods: {

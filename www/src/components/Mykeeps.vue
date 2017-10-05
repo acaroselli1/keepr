@@ -1,15 +1,16 @@
 <template class="all">
     <div> 
-    <h1>My<span>k</span>eeps</h1>
-        <button class="btn btn-primary" @click="logoutUser">Logout</button>
-        <li><router-link class ="browse" to="/userdash">Dashboard</router-link></li> 
+      <userdash></userdash>
+      <h1>My<span>k</span>eeps</h1>
+        <!-- <button class="btn btn-primary" @click="logoutUser">Logout</button>
+        <li><router-link class ="browse" to="/userdash">Dashboard</router-link></li>  -->
       <form @submit.prevent="createKeep()">
           <p>
           <input class="formcss" type="text" v-model="keepname" placeholder="Keep Name">
           
           <input class="formcss" type="text" v-model="keepdescription" placeholder="Keep Description">
           
-          <input class="formcss" type="text" v-model="keepUrl" placeholder="Keep Img Url">
+          <input class="formcss" type="text" v-model="keepUrl" placeholder="Keep Img or Video Url">
 
           <input class="formcss" type="text" v-model="vaultName" placeholder= "Vault Name">
 
@@ -19,23 +20,23 @@
         <button class="btn btn-primary vault">Create Keep</button>
       </form>
 
-      <div v-if="see">
+   <!--<div v-if="see">
         <div class="boards" v-for="keep in keeps">
           <span @click="getKeeps(keep._id)">
-        <router-link class="vaultcolor" :to="'/keeps/'+ keep._id">{{keep.name}}</router-link> <!--{{board.description}}-->
+        <router-link class="vaultcolor" :to="'/keeps/'+ keep._id">{{keep.name}}</router-link> 
         </span>
           <span @click="removeKeep(keep)"><button class="red btn btn-primary">x</button></span>
         </div>
-      </div>
-      <div class="container" >
+      </div>-->
+      <div class="container">
         <div class="row" >
           <div class="col-xs-2" v-for ="keep in keeps"> 
             <div class="card" style="width: 20rem;" >
-              <img class="card-img-top" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt="Card image cap">
+              <img class="card-img-top" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt='click "Link" for video'>
               <div class="card-body">
                 <h4 class="card-title">{{keep.name}}</h4>
                 <p class="card-text">{{keep.description}}</p>
-                <a :href="keepUrl" class="btn btn-primary">Keep</a><span @click="removeKeep(keep)"><button class="red btn btn-primary">x</button></span> 
+                <a :href="keep.imgUrl" class="btn btn-primary">Link</a><span @click="removeKeep(keep)"><button class="red btn btn-primary">x</button></span> 
               </div>
             </div>
           </div>
@@ -45,7 +46,9 @@
 </template>
 
 <script>
-  import { store } from '../store'
+ 
+ import userdash from './userdash'
+ import { store } from '../store'
   export default {
     name: 'mykeeps',
     data() {
@@ -74,6 +77,10 @@
         return this.$store.state.keeps 
       }
     
+    },
+    components: {
+           userdash
+           
     },
 
     methods: {
@@ -222,6 +229,7 @@
   img{
     border-top-right-radius:10px;
     border-top-left-radius:10px;
+    color:skyblue;
   }
 
 

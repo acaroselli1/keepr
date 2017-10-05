@@ -5,6 +5,8 @@ import Mainsearch from '@/components/mainsearch'
 import Userdash from '@/components/userdash'
 import Myvaults from '@/components/myvaults'
 import Mykeeps from '@/components/mykeeps'
+import Vault from '@/components/vault'
+
 
 Vue.use(Router)
 
@@ -34,9 +36,13 @@ export default new Router({
       path: '/mykeeps',
       name: 'Mykeeps',
       component: Mykeeps,
-    }
+    },
+    {
+      path: '/vault/:vaultId',
+      name: 'Vault',
+      component: Vault,
+    },
+
     
-
-
   ]
 })
