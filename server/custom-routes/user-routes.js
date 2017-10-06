@@ -65,6 +65,25 @@ module.exports = {
   //       })
   //   }
   // }
+  vaultForKeep: {
+    path: '/vaults/:vaultId/keeps',
+    reqType: 'post',
+    method(req, res, next) {
+      let action = 'Assign Keep to Vault'
+      Vaults.findOne({_id : req.params.vaultId})
+        .then(vault => {
+          var keep =req.body;
+          keep.vaultId = vault._id;
+          Keeps.create(keep)
+          res.send(handleResponse(action, vault))
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+
+
   vaultKeeps: {
     path: '/vaults/:vaultId/keeps',
     reqType: 'get',

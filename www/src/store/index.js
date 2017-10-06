@@ -171,16 +171,25 @@ var store = new vuex.Store({
      setKeepToVault({ commit, dispatch }, keep) {
       // let updatedTask = updater.task
       // updatedTask.listId = updater.updatedId
-      api.put('/keeps/' + keep._id, keep)
+      console.log(keep)
+      if(keep.vaultId === ''){
+        delete keep.vaultId
+        dispatch('createKeep', keep)
+     }else{
+      api.post('/vaults/' + keep.vaultId + '/keeps', keep)
       .then(res => {
-        dispatch('getKeepsByVault', keep)
-
-        // updater.task.listId = updater.oldId
-        // dispatch('getTasksByList', updater.task)
+        dispatch('getUserKeeps')
+           
+      //   // updater.task.listId = updater.oldId
+      //   // dispatch('getTasksByList', updater.task)
+      // })
+      // .then( res => {
+      //   dispatch('getKeepsByVault', keep.vaultId)
       })
       .catch(err => {
         commit('handleError', err)
       })
+    }
     },
      getKeepsByVault({ commit, dispatch }, vaultId) {
       api('vaults/'+ vaultId + '/keeps')

@@ -70,7 +70,8 @@
   export default {
     name: 'mykeeps',
     data() {
-      return {
+      return { 
+        vaultId: '',
         keepname:'',
         keepdescription:'',
         keepUrl:'',
@@ -119,13 +120,14 @@
       },
 
       createKeep() {
-        this.$store.dispatch('createKeep',
+        this.$store.dispatch('setKeepToVault',
           {
             name: this.keepname,
             description: this.keepdescription,
             imgUrl:this.keepUrl,
             creatorId: this.$store.state.user._id,
-            public:this.public
+            public:this.public,
+            vaultId: this.vaultId
           }
 
         )
@@ -133,6 +135,7 @@
         this.description = '';
         this.imgUrl = '';
         this.creatorId = '';
+        this.vaultId = '',
         this.public;
 
       },
@@ -175,11 +178,19 @@
       logoutUser() {
         this.$store.dispatch('logout')
       },
+     
+     
+     
       setKeepToVault(vaultId) {
-        keep.vaultId = vaultId       
+        this.vaultId = vaultId
+      //   keep.vaultId = vaultId       
         
-      this.$store.dispatch('setKeepToVault', keep)
+      // this.$store.dispatch('setKeepToVault', keep)
       },
+
+
+
+
       makePublic(){
       this.public=true;
       },
