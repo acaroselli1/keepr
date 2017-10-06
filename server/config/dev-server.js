@@ -29,7 +29,7 @@ function logger(req, res, next) {
 }
 
 // REGISTER MIDDLEWARE
-app.use(express.static(__dirname + '../../wwwroot'))
+app.use(express.static(__dirname + '/../../wwwroot'))
 app.use(session)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
