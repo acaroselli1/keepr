@@ -5,13 +5,13 @@ import router from '../router'
 import axios from 'axios'
 
 let api = axios.create({
-  baseURL: '//localhost:3000/api/',
+  baseURL: '//keepr-alexc.herokuapp.com',
   timeout: 2000,
   withCredentials: true
 })
 
 let auth = axios.create({
-  baseURL: '//localhost:3000/',
+  baseURL: '//keepr-alexc.herokuapp.com',
   timeout: 2000,
   withCredentials: true
 })

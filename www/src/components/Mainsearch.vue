@@ -13,6 +13,7 @@
             <img class="card-img-top alt" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt="click 'Link' for link">
             <div class="card-body">
               <h4 class="card-title">{{keep.name}}</h4>
+              <p class="card-text">{{keep.description}}</p>
               <a :href="keep.imgUrl" class="btn btn-primary link">Link</a> 
             </div>
           </div>
