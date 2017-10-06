@@ -5,7 +5,7 @@ import router from '../router'
 import axios from 'axios'
 
 let api = axios.create({
-  baseURL: '//keepr-alexc.herokuapp.com',
+  baseURL: '//keepr-alexc.herokuapp.com/api',
   timeout: 2000,
   withCredentials: true
 })
