@@ -4,11 +4,12 @@
       <h1><span id ="title">k</span>eepr Dashboard</h1>
       
       <div class="heading">
-        <button class="btn btn-primary" @click="logoutUser">Logout</button>
+        <router-link to ="/"><button class="btn btn-primary" @click="logoutUser">Logout</button></router-link>
+        <li><router-link class ="browse" to="/">Login</router-link></li>
         <li><router-link class ="browse" to="/mainsearch">Browse</router-link></li>
         <li><router-link class ="vaults" to="/myvaults">MyVaults</router-link></li>
         <li><router-link class="keeps" to="/mykeeps">My<span class="k">k</span>eeps</router-link></li>
-
+        
       </div>
     </div>  
 </template>
@@ -26,7 +27,6 @@
    
     methods: {
     
-
      
 
       logoutUser() {

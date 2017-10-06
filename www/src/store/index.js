@@ -220,7 +220,26 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
+    getUserKeeps({ commit, dispatch }) {
+      api('userkeeps')
+        .then(res => {
+          commit('setKeeps', res.data.data)
+          console.log(res.data.data);
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    getPublicKeeps({ commit, dispatch }) {
+      api('publickeeps')
+        .then(res => {
+          commit('setKeeps', res.data.data)
+          console.log(res.data.data);
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
 
 
     //Vault Actions
@@ -314,7 +333,7 @@ var store = new vuex.Store({
       auth.post("login", user).then(res => {
         console.log("login?", res)
         if (res.data.data) {
-          router.push('/userdash')
+          router.push('/mainsearch')
         } else if (res.data.error) {
           alert('Invalid Username or Password')
         }

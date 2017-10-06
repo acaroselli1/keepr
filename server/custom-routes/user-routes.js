@@ -22,6 +22,37 @@ module.exports = {
         })
     }
   },
+  userKeeps: {
+    path: '/userkeeps',
+    reqType: 'get',
+    method(req, res, next){
+      let action = 'Find User Keeps'
+      Keeps.find({creatorId: req.session.uid})
+        .then(keeps => {
+          console.log("keeps: ",keeps);
+          res.send(handleResponse(action, keeps))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+  publicKeeps: {
+    path: '/publickeeps',
+    reqType: 'get',
+    method(req, res, next){
+      let action = 'Find Public Keeps'
+      Keeps.find({public: true})
+        .then(keeps => {
+          console.log("keeps: ",keeps);
+          res.send(handleResponse(action, keeps))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+
+
+
   // sharedBoards: {
   //   path: '/sharedBoards',
   //   reqType: 'get',

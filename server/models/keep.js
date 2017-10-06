@@ -7,6 +7,8 @@ var schema = new mongoose.Schema({
 	description: { type: String },
 	created: { type: Number, default: Date.now() },
 	imgUrl:{type:String, required:true},
+	count:{type:Number},
+	public:{type:Boolean, default:false},
 	// Relations
 	// private:{type:Boolean, require:true, default:true},
 	vaultId: { type: ObjectId, ref: models.vault.name},

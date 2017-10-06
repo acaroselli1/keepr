@@ -7,14 +7,14 @@
     </p>-->
     <h1><span class="k">k</span>eepr Main List</h1>
     <div class="container">
-      <div class="row">
-        <div class="col-xs-3">
-          <div class="card" style="width: 20rem;">
-            <img class="card-img-top" src ="https://s3-us-west-1.amazonaws.com/powr/defaults/image-slider2.jpg" width ="190rem" height= "150rem" alt="Card image cap">
+      <div class="row" >
+        <div class="col-xs-2" v-for ="keep in keeps"> 
+          <div class="card" style="width: 20rem;" >
+            <img class="card-img-top alt" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt="click 'Link' for link">
             <div class="card-body">
-              <h4 class="card-title">Elephant</h4>
-              <p class="card-text">A gentle giant.</p>
-              <a href="https://s3-us-west-1.amazonaws.com/powr/defaults/image-slider2.jpg" class="btn btn-primary">Keep</a> 
+              <h4 class="card-title">{{keep.name}}</h4>
+              <p class="card-text">{{keep.description}}</p>
+              <a :href="keep.imgUrl" class="btn btn-primary link">Link</a><span @click="removeKeep(keep)"><button class="btn btn-primary remove">x</button></span> 
             </div>
           </div>
         </div>
@@ -56,10 +56,17 @@
       }
      
 
-    }
+    },
+    computed: {
+     
+      keeps() {
+        return this.$store.state.keeps 
+      }
+    },
+     mounted() {
+      this.$store.dispatch('getPublicKeeps')
 
-
-
+    }, 
 
   }
 
@@ -85,10 +92,10 @@
 
   }
 
-  button {
+  /* button {
     display: flex;
     justify-content: flex-start;
-  }
+  } */
 
   .card{
     border: 5px solid grey;
@@ -115,4 +122,21 @@
   .k{
     color:skyblue;
   }
+  .remove{
+   opacity:0;
+  }
+
+  .card:hover .remove{
+  opacity:1;
+  }
+
+  .link{
+  opacity:0;
+  }
+
+  .card:hover .link{
+  opacity:1;
+  }
+
+
 </style>

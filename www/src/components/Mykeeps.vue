@@ -11,7 +11,15 @@
           <input class="formcss" type="text" v-model="keepdescription" placeholder="Keep Description">
           
           <input class="formcss" type="text" v-model="keepUrl" placeholder="Keep Img or Video Url">
-
+          
+          <span class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Privacy Options ...
+                      <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                  <li @click ="makePublic()">Public</li>
+                  <li @click ="makePrivate()">Private</li>
+              </ul>
+          </span>
           <!-- <input class="formcss" type="text" v-model="vaultName" placeholder= "Vault Name"> -->
           <span class="dropdown">
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Optional Vault Storage ...
@@ -23,7 +31,6 @@
               </ul>
           </span>
 
-          <button class = "btn btn-primary">Make Public</button>
           </p>
         <button class="btn btn-primary vault">Create Keep</button>
       </form>
@@ -43,7 +50,7 @@
         <div class="row" >
           <div class="col-xs-2" v-for ="keep in keeps"> 
             <div class="card" style="width: 20rem;" >
-              <img class="card-img-top alt" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt='click "Link" for video'>
+              <img class="card-img-top alt" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt="click 'Link' for link">
               <div class="card-body">
                 <h4 class="card-title">{{keep.name}}</h4>
                 <p class="card-text">{{keep.description}}</p>
@@ -68,6 +75,7 @@
         keepdescription:'',
         keepUrl:'',
         vaultName:'',
+        public:'',
         // name: '',
         // description: '',
         see: true,
@@ -77,7 +85,7 @@
     },
     mounted() {
       this.$store.dispatch('getVaults')
-      this.$store.dispatch('getKeeps')
+      this.$store.dispatch('getUserKeeps')
 
     },
     computed: {
@@ -116,7 +124,8 @@
             name: this.keepname,
             description: this.keepdescription,
             imgUrl:this.keepUrl,
-            creatorId: this.$store.state.user._id
+            creatorId: this.$store.state.user._id,
+            public:this.public
           }
 
         )
@@ -124,6 +133,7 @@
         this.description = '';
         this.imgUrl = '';
         this.creatorId = '';
+        this.public;
 
       },
 
@@ -169,6 +179,12 @@
         keep.vaultId = vaultId       
         
       this.$store.dispatch('setKeepToVault', keep)
+      },
+      makePublic(){
+      this.public=true;
+      },
+      makePrivate(){
+      this.private =false;
       }
 
 
