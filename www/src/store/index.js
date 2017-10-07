@@ -229,6 +229,17 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+    removeKeepInVault({ commit, dispatch }, keep) {
+      api.delete('/keeps/' + keep._id)
+        .then(res => {
+          dispatch('getKeepsByVault')
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+
     getUserKeeps({ commit, dispatch }) {
       api('userkeeps')
         .then(res => {

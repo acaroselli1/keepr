@@ -78,7 +78,7 @@
         },
           methods: {
             removeKeep(keep) {
-                this.$store.dispatch('removeKeep', keep)
+                this.$store.dispatch('removeKeepInVault', keep)
               }
         }
     }
