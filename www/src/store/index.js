@@ -223,7 +223,7 @@ var store = new vuex.Store({
     removeKeep({ commit, dispatch }, keep) {
       api.delete('/keeps/' + keep._id)
         .then(res => {
-          dispatch('getKeeps')
+          dispatch('getUserKeeps')
         })
         .catch(err => {
           commit('handleError', err)
