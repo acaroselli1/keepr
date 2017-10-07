@@ -213,7 +213,7 @@ var store = new vuex.Store({
     createKeep({ commit, dispatch }, keep) {
       api.post('keeps', keep)
         .then(res => {
-          dispatch('getKeeps')
+          dispatch('getUserKeeps')
         })
         .catch(err => {
           commit('handleError', err)
