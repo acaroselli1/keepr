@@ -13,11 +13,11 @@
                             <div class="row">
                                 <div class="col-xs-2 vault" v-for="keep in keeps">
                                     <div class="card" style="width:20rem;">
-                                        <img class="card-img-top alt" :src="keep.imgUrl" width="190rem" height="150rem" alt='click "Link" for video'>
+                                        <img class="card-img-top alt" :src="keep.imgUrl" width="190rem" height="150rem" alt='click "View" for link'>
                                         <div class="card-body">
                                             <h4 class="card-title">{{keep.name}}</h4>
                                             <p class="card-text">{{keep.description}}</p>
-                                            <a :href="keep.imgUrl" class="btn btn-primary link">Link</a><span @click="removeKeep(keep)"><button class="btn btn-primary remove">x</button></span>
+                                            <a :href="keep.imgUrl" class="btn btn-primary link">View</a><span @click="removeKeepInVault(keep)"><button class="btn btn-primary remove">x</button></span>
                                         </div>
                                     </div>
                                 </div>
@@ -56,6 +56,9 @@
             this.$root.$store.dispatch('getKeepsByVault', this.$route.params.vaultId)
         },
 
+        updated(){
+            this.$root.$store.dispatch('getKeepsByVault', this.$route.params.vaultId)
+        },
 
         components: {
             userdash
@@ -66,7 +69,7 @@
                 return this.$store.state.activeVault
             },
             keeps() {
-                return this.$store.state.keeps
+                return this.$store.state.vaultKeeps
             }
             // boards() {
             //     return this.$store.state.boards
@@ -77,7 +80,7 @@
 
         },
           methods: {
-            removeKeep(keep) {
+            removeKeepInVault(keep) {
                 this.$store.dispatch('removeKeepInVault', keep)
               }
         }

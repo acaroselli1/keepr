@@ -50,11 +50,11 @@
         <div class="row" >
           <div class="col-xs-2" v-for ="keep in keeps"> 
             <div class="card" style="width: 20rem;" >
-              <img class="card-img-top alt" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt="click 'Link' for link">
+              <img class="card-img-top alt" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt="click 'View' for link">
               <div class="card-body">
                 <h4 class="card-title">{{keep.name}}</h4>
                 <p class="card-text">{{keep.description}}</p>
-                <a :href="keep.imgUrl" class="btn btn-primary link">Link</a><span @click="removeKeep(keep)"><button class="btn btn-primary remove">x</button></span> 
+                <a :href="keep.imgUrl" class="btn btn-primary link">View</a><span @click="removeKeep(keep)"><button class="btn btn-primary remove">x</button></span> 
               </div>
             </div>
           </div>
@@ -77,6 +77,7 @@
         keepUrl:'',
         vaultName:'',
         public:'',
+        count:0,
         // name: '',
         // description: '',
         see: true,
@@ -89,6 +90,10 @@
       this.$store.dispatch('getUserKeeps')
 
     },
+
+    // updated(){
+    // this.$store.dispatch('getUserKeeps')
+    // },
     computed: {
      
       keeps() {
@@ -127,7 +132,8 @@
             imgUrl:this.keepUrl,
             creatorId: this.$store.state.user._id,
             public:this.public,
-            vaultId: this.vaultId
+            vaultId: this.vaultId,
+            count:this.count
           }
 
         )
@@ -136,7 +142,8 @@
         this.imgUrl = '';
         this.creatorId = '';
         this.vaultId = '',
-        this.public;
+        this.public,
+        this.count
 
       },
 
@@ -197,8 +204,7 @@
       makePrivate(){
       this.private =false;
       }
-
-
+     
     },
 
     

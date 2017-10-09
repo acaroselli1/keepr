@@ -90,6 +90,7 @@ var store = new vuex.Store({
     vaults: {},
     keeps:{},
     activeVault: {},
+    vaultKeeps:{},
     error: {}
 
   },
@@ -132,7 +133,7 @@ var store = new vuex.Store({
     },
 
     setKeepsByVault(state,data){
-      state.keeps = data
+      state.vaultKeeps = data
     },
 
     handleError(state, err) {
@@ -194,7 +195,7 @@ var store = new vuex.Store({
      getKeepsByVault({ commit, dispatch }, vaultId) {
       api('vaults/'+ vaultId + '/keeps')
         .then(res => {
-          commit('setKeeps', res.data.data)
+          commit('setKeepsByVault', res.data.data)
           console.log("In the store, in function getKeepsByVault", res.data.data);
         })
         .catch(err => {
@@ -220,6 +221,17 @@ var store = new vuex.Store({
         })
 
     },
+    updateViews({ commit, dispatch }, keep) {
+      api.put('keeps', keep)
+        .then(res => {
+          dispatch('getPublicKeeps')
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+
+    },
+
     removeKeep({ commit, dispatch }, keep) {
       api.delete('/keeps/' + keep._id)
         .then(res => {

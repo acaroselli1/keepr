@@ -10,11 +10,12 @@
       <div class="row" >
         <div class="col-xs-2" v-for ="keep in keeps"> 
           <div class="card" style="width: 20rem;" >
-            <img class="card-img-top alt" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt="click 'Link' for link">
+            <img class="card-img-top alt" :src ="keep.imgUrl" width ="190rem" height= "150rem" alt="click 'View' for link">
             <div class="card-body">
               <h4 class="card-title">{{keep.name}}</h4>
               <p class="card-text">{{keep.description}}</p>
-              <a :href="keep.imgUrl" class="btn btn-primary link">Link</a> 
+              <p class="card-text">Views: {{keep.count}}</p>
+              <a :href="keep.imgUrl" @click ="addToCount(keep)" class="btn btn-primary link">View</a>
             </div>
           </div>
         </div>
@@ -31,7 +32,7 @@
     name: 'mainsearch',
     data() {
       return {
-
+     
 
       }
     },
@@ -53,8 +54,13 @@
 
       loggedIn(){
         location.reload();
+      },
+
+      addToCount(keep){
+      keep.count++;
+      this.$store.dispatch('updateViews',keep);
       }
-     
+
 
     },
     computed: {
@@ -67,6 +73,11 @@
       this.$store.dispatch('getPublicKeeps')
 
     }, 
+
+     updated(){
+      this.$store.dispatch('getPublicKeeps')
+
+    }
 
   }
 

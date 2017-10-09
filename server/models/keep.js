@@ -7,7 +7,7 @@ var schema = new mongoose.Schema({
 	description: { type: String },
 	created: { type: Number, default: Date.now() },
 	imgUrl:{type:String, required:true},
-	count:{type:Number},
+	count:{type:Number, default:0},
 	public:{type:Boolean, default:false},
 	// Relations
 	// private:{type:Boolean, require:true, default:true},
