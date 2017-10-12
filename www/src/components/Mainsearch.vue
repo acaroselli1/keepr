@@ -15,7 +15,7 @@
               <h4 class="card-title">{{keep.name}}</h4>
               <p class="card-text">{{keep.description}}</p>
               <p class="card-text">Views: {{keep.count}}</p>
-              <a :href="keep.imgUrl" @click ="addToCount(keep)" class="btn btn-primary link">View</a>
+              <button @click="addToCount(keep)" class="btn btn-primary link">View</button>
             </div>
           </div>
         </div>
@@ -74,10 +74,10 @@
 
     }, 
 
-     updated(){
-      this.$store.dispatch('getPublicKeeps')
+    //  updated(){                                 //comment this out to increment counter - though not persistent
+    //   this.$store.dispatch('getPublicKeeps')
 
-    }
+    // }
 
   }
 

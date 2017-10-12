@@ -5,7 +5,7 @@ import router from '../router'
 import axios from 'axios'
 
 let api = axios.create({
-  baseURL: '//keepr-alexc.herokuapp.com/api',
+  baseURL: '//keepr-alexc.herokuapp.com/api/',
   timeout: 2000,
   withCredentials: true
 })
@@ -222,9 +222,10 @@ var store = new vuex.Store({
 
     },
     updateViews({ commit, dispatch }, keep) {
-      api.put('keeps', keep)
+      console.log(keep);
+      api.put('keeps/' + keep._id, keep)
         .then(res => {
-          dispatch('getPublicKeeps')
+          window.location.href = keep.imgUrl;
         })
         .catch(err => {
           commit('handleError', err)
