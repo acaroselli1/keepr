@@ -11,7 +11,7 @@ var schema = new mongoose.Schema({
 	public:{type:Boolean, default:false},
 	// Relations
 	// private:{type:Boolean, require:true, default:true},
-	vaultId: { type: ObjectId, ref: models.vault.name},
+	vaultId: [{ type: ObjectId, ref: models.vault.name}],
 	creatorId: {type: ObjectId, ref: models.user.name, required: true}
 });
 

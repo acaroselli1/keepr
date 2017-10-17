@@ -82,6 +82,20 @@ module.exports = {
         })
     }
   },
+  addKeepToVault: {
+    path: '/addkeeptovault/:keepId',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Assign Keep to Vault'
+      Keeps.findById({_id : req.body._id})
+        .then(keep => {
+          keep.vaultId.push(req.body.vaultId);
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
 
 
   vaultKeeps: {
@@ -89,7 +103,7 @@ module.exports = {
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find Vault Keeps'
-      Keeps.find({ vaultId: req.params.vaultId })
+      Keeps.find({ vaultId: {$in:[req.params.vaultId]}})
         .then(keeps => {
           res.send(handleResponse(action, keeps))
         }).catch(error => {
