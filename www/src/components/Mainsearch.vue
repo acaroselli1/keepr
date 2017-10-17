@@ -72,7 +72,7 @@
         this.$store.dispatch('updateViews', keep);
       },
       setKeepToVault(keep, vaultId) {
-        keep.vaultId = vaultId
+        keep.vaultId.push(vaultId);
         this.$store.dispatch('updateKeep', keep)
       }
 

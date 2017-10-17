@@ -56,9 +56,9 @@
             this.$root.$store.dispatch('getKeepsByVault', this.$route.params.vaultId)
         },
 
-        updated(){
-            this.$root.$store.dispatch('getKeepsByVault', this.$route.params.vaultId)
-        },
+        // updated(){
+        //     this.$root.$store.dispatch('getKeepsByVault', this.$route.params.vaultId)
+        // },
 
         components: {
             userdash
